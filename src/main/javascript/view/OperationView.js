@@ -10,8 +10,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     'click .toggleOperation'  : 'toggleOperationContent',
     'mouseenter .api-ic'      : 'mouseEnter',
     'dblclick .curl'          : 'selectText',
-    'click .custom-param-add' : 'customParamAdd',
-    'click .custom-param-remove' : 'customParamRemove',
+    'click .x-mq-param-add'   : 'X_mqParamAdd',
+    'click .x-mq-param-remove' : 'X_mqParamRemove',
     'change [name=responseContentType]' : 'showSnippet'  },
 
   initialize: function(opts) {
@@ -32,17 +32,24 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     return this;
   },
 
-  customParamAdd: function(event) {
-	var tbody = $(event.target).closest('div.custom-params').find('tbody.custom-params');
-    var view = new SwaggerUi.Views.CustomParameterSingleView({
-	  tagName: 'tr'
+  X_mqParamAdd: function(event) {
+	var viewParam = new SwaggerUi.Views.X_MQ_Param({
+		tagName: 'tr'
 	});
-	tbody.append(view.render().el);
+	$(event.target).closest('td').find('tbody.x-mq-params').append(viewParam.render().el);
   },
 
-  customParamRemove: function(event) {
-	var tbody = $(event.target).closest('div.custom-params').find('tbody.custom-params');
-	tbody.children('tr:last()').remove();
+  X_mqParamRemove: function(event) {
+	var tbody = $(event.target).closest('td').find('tbody.x-mq-params');
+	var count = tbody.children().length;
+
+	if (count === 1) {
+		var trLast = tbody.children('tr:last()');
+		trLast.find('input.x-mq-param-name').val('');
+		trLast.find('input.x-mq-param-value').val('');
+	} else {
+		tbody.children('tr:last()').remove();
+	}
   },
 
   selectText: function(event) {
@@ -251,14 +258,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       param.type = type;
     }
 
-    var customParamView = new SwaggerUi.Views.CustomParameterView();
-    $('div.custom-params', $(this.el)).append(customParamView.render().el);
-
-	var view = new SwaggerUi.Views.CustomParameterSingleView({
-	  tagName: 'tr'
-	});
-	$('tbody.custom-params', $(this.el)).append(view.render().el);
-
     responseContentTypeView = new SwaggerUi.Views.ResponseContentTypeView({
       model: contentTypeModel,
       router: this.router
@@ -461,7 +460,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         }
       }
 
-	  window.lol = map;
       opts.responseContentType = $('div select[name=responseContentType]', $(this.el)).val();
       opts.requestContentType = $('div select[name=parameterContentType]', $(this.el)).val();
       $('.response_throbber', $(this.el)).show();
@@ -483,7 +481,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
   getInputMap: function (form) {
     var map, ref1, l, len, o, ref2, m, len1, val, ref3, n, len2;
     map = {};
-    ref1 = form.find('input:not(.custom-param-add, .custom-param-remove, .custom-param-name, .custom-param-value)');
+    ref1 = form.find('input:not(.x-mq-param-name, .x-mq-param-value, .x-mq-param-add, .x-mq-param-remove)');
     for (l = 0, len = ref1.length; l < len; l++) {
       o = ref1[l];
       if ((o.value !== null) && jQuery.trim(o.value).length > 0) {
@@ -510,14 +508,14 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       }
     }
 
-	// Custom parameters
+	// Multiple query parameters
 	var addParams = [];
 	var customMap = {};
 
-    form.find('input.custom-param-name').each(function(id, elem) {
+    form.find('input.x-mq-param-name').each(function(id, elem) {
 	  var jqElem = $(elem);
 	  var name = jqElem.val().trim();
-	  var value = jqElem.closest('tr').find('input.custom-param-value').val().trim();
+	  var value = jqElem.closest('tr').find('input.x-mq-param-value').val().trim();
 
 	  if (name.length !== 0) {
 		customMap[name] = value;
@@ -526,23 +524,24 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 	});
 
 	var _this = this;
-	var error_div = form.find('div.custom-param-error');
-	error_div.html('');
 
 	$.each(this.model.parameters, function (index, param) {
-	  var addIndex = $.inArray(param.name, addParams);
+	  if (typeof(param) === 'undefined') {
+		return;
+	  }
 
-	  if (typeof(param.custom) !== 'undefined' && addIndex !== -1) {
+	  var addIndex = $.inArray(param.name, addParams);
+	  var isMultipleQueryParams = typeof(param['x-multiple-query-params']) !== 'undefined' && param['x-multiple-query-params'];
+
+	  if (isMultipleQueryParams && addIndex !== -1) {
 	    map[param.name] = customMap[param.name];
 
 		addParams.splice(addIndex, 1);
 		console.log('Already added: ' + param.name);
-	  } else if (typeof(param.custom) === 'undefined' && addIndex !== -1) {
+	  } else if (!isMultipleQueryParams && addIndex !== -1) {
 		addParams.splice(addIndex, 1);
 		console.log('Contains in model (not overriding): ' + param.name);
-
-		error_div.append('<strong>' + param.name + '</strong> should be filled in Parameters table. Skipped<br>');
-	  } else if (typeof(param.custom) !== 'undefined' && addIndex === -1) {
+	  } else if (isMultipleQueryParams && addIndex === -1) {
 		_this.model.parameters.splice(index, 1);
 		console.log('Removed: ' + param.name);
 	  }
@@ -554,10 +553,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 		_this.model.parameters.push({
 			name: param_name,
 			in: 'query',
-			custom: true
+			'x-multiple-query-params': true
 		});
-
-		console.log('Added: ' + param_name);
 	});
 
     return map;

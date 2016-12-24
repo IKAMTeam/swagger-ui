@@ -14,6 +14,9 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
         return opts.inverse(this);
       }
     });
+
+	this.model.isXMultipleQueryParams = this.model.in === 'query' &&
+		typeof(this.model['x-multiple-query-params']) !== 'undefined' && this.model['x-multiple-query-params'];
   },
 
   render: function() {
@@ -130,6 +133,13 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       this.toggleResponseSnippet();
     }
 
+	if (this.model.isXMultipleQueryParams) {
+		var viewParam = new SwaggerUi.Views.X_MQ_Param({
+			tagName: 'tr'
+		});
+		$('tbody.x-mq-params', $(this.el)).append(viewParam.render().el);
+	}
+
     return this;
   },
 
@@ -168,7 +178,9 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
   // Return an appropriate template based on if the parameter is a list, readonly, required
   template: function(){
-    if (this.model.isList) {
+	if (this.model.isXMultipleQueryParams) {
+	  return Handlebars.templates.param;
+	} else if (this.model.isList) {
       return Handlebars.templates.param_list;
     } else {
       if (this.options.readOnly) {

@@ -1,4 +1,19 @@
-<td class='code'><label for='{{{escape valueId}}}'>{{{escape name}}}</label></td>
+{{#if isXMultipleQueryParams}}
+<td colspan="2" class="x-mq">
+	<table>
+		<tbody class="x-mq-params">
+		</tbody>
+	</table>
+
+	<div class="x-mq-param-buttons">
+		<input type="button" class="x-mq-param-add" value="Add" />
+		<input type="button" class="x-mq-param-remove" value="Remove last" />
+	</div>
+</td>
+{{else}}
+<td class='code'>
+	<label for='{{{escape valueId}}}'>{{{escape name}}}</label>
+</td>
 <td>
 
 	{{#if isBody}}
@@ -9,8 +24,8 @@
 			{{#if default}}
 				<div class="editor_holder"></div>
 				<textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'>{{{escape default}}}</textarea>
-        <br />
-        <div class="parameter-content-type" />
+		<br />
+		<div class="parameter-content-type" />
 			{{else}}
 				<textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'></textarea>
 				<div class="editor_holder"></div>
@@ -29,6 +44,7 @@
 	{{/if}}
 
 </td>
+{{/if}}
 <td class="markdown">{{{sanitize description}}}</td>
 <td>{{{escape paramType}}}</td>
 <td>
