@@ -1170,16 +1170,20 @@
 .swagger-section .swagger-ui-wrap .operation-status td.markdown > p:last-child {
   padding-bottom: 0;
 }
-div.custom-params {
-  padding-bottom: 10px;
+input.x-mq-param-name {
+  width: 100px;
 }
-input.custom-param-name,
-input.custom-param-value {
-  width: 100%;
+input.x-mq-param-value {
+  width: 270px;
 }
-div.custom-param-error {
-  padding-top: 5px;
-  color: red;
+td.x-mq {
+  padding-left: 0;
+}
+div.x-mq-param-buttons {
+  padding-top: 10px;
+}
+div.x-mq-eqchar {
+  padding-top: 2px;
 }
 .swagger-section .title {
   font-style: bold;
@@ -1354,6 +1358,10 @@ div.custom-param-error {
 }
 .swagger-section .api-popup-actions {
   padding-top: 10px;
+}
+.swagger-section fieldset {
+  padding-bottom: 10px;
+  padding-left: 20px;
 }
 #header {
   display: none;

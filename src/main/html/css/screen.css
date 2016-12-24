@@ -1170,16 +1170,20 @@
 .swagger-section .swagger-ui-wrap .operation-status td.markdown > p:last-child {
   padding-bottom: 0;
 }
-div.custom-params {
-  padding-bottom: 10px;
+input.x-mq-param-name {
+  width: 100px;
 }
-input.custom-param-name,
-input.custom-param-value {
-  width: 100%;
+input.x-mq-param-value {
+  width: 270px;
 }
-div.custom-param-error {
-  padding-top: 5px;
-  color: red;
+td.x-mq {
+  padding-left: 0;
+}
+div.x-mq-param-buttons {
+  padding-top: 10px;
+}
+div.x-mq-eqchar {
+  padding-top: 2px;
 }
 .swagger-section .title {
   font-style: bold;
@@ -1355,6 +1359,10 @@ div.custom-param-error {
 .swagger-section .api-popup-actions {
   padding-top: 10px;
 }
+.swagger-section fieldset {
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
 .swagger-section .access {
   float: right;
 }
@@ -1422,7 +1430,7 @@ div.custom-param-error {
   cursor: pointer;
 }
 .swagger-section #header {
-  background-color: #89bf04;
+  background-color: #4D4D4D;
   padding: 9px 14px 19px 14px;
   height: 23px;
   min-width: 775px;
@@ -1452,21 +1460,31 @@ div.custom-param-error {
 .swagger-section #auth_container .authorize__btn {
   display: block;
   text-decoration: none;
-  font-weight: bold;
-  padding: 6px 8px;
-  font-size: 0.9em;
-  color: white;
-  background-color: #547f00;
+  padding: 6px 6px 6px 6px;
+  font-size: 14px;
+  text-align: center;
+  color: #333333;
+  background-color: #FFF;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
   -ms-border-radius: 4px;
   -khtml-border-radius: 4px;
   border-radius: 4px;
+  align-items: flex-start;
+  width: auto;
+  vertical-align: middle;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  background-image: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Roboto', Arial, Helvetica, sans-serif, Tahoma;
 }
 .swagger-section #explore:hover,
 .swagger-section #auth_container .authorize__btn:hover {
-  background-color: #547f00;
+  background-color: #aeaeae;
 }
 .swagger-section #header #logo {
   font-size: 1.5em;
