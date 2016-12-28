@@ -140,6 +140,13 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 		$('tbody.x-mq-params', $(this.el)).append(viewParam.render().el);
 	}
 
+    // Preventing submit on [Enter] keypress
+	$(this.el).on('keypress', ':input:not(textarea)', function(event) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+		}
+	});
+
     return this;
   },
 
