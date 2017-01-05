@@ -395,6 +395,12 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     if (e !== null) {
       e.preventDefault();
     }
+
+    if (_.isEmpty(this.model.clientAuthorizations.authz)) {
+        alert('Please, authorize first!');
+        return false;
+    }
+
     form = $('.sandbox', $(this.el));
     error_free = true;
     form.find('input.required').each(function() {
