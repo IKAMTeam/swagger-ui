@@ -157,6 +157,14 @@ window.SwaggerUi = Backbone.Router.extend({
       });
       $('#auth_container').append(this.authView.render().el);
     }
+    this.linkView = new SwaggerUi.Views.LinkButtonsView({
+        apiVer: this.options.apiVer,
+        apiVersions: this.options.apiVersions,
+        appServerUrl: this.options.appServerUrl,
+        router: this
+    });
+    $('#link_container').append(this.linkView.render().el);
+
     this.showMessage();
     switch (this.options.docExpansion) {
       case 'full':

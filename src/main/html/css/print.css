@@ -1251,7 +1251,8 @@ div.x-mq-eqchar {
   margin-top: -6px;
   margin-left: 4px;
 }
-.swagger-section #auth_container {
+.swagger-section #auth_container,
+.swagger-section #link_container {
   color: #fff;
   display: inline-block;
   border: none;
@@ -1259,8 +1260,12 @@ div.x-mq-eqchar {
   width: 87px;
   height: 13px;
 }
-.swagger-section #auth_container .authorize__btn {
+.swagger-section #auth_container .authorize__btn,
+.swagger-section #link_container .authorize__btn {
   color: #fff;
+}
+.swagger-section #link_container {
+  width: auto;
 }
 .swagger-section .auth_container {
   padding: 0 0 10px;
