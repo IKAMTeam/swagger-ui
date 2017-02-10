@@ -333,9 +333,29 @@
   cursor: pointer;
 }
 .swagger-section .swagger-ui-wrap .info_title {
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   font-weight: bold;
   font-size: 25px;
+}
+.swagger-section .swagger-ui-wrap div.api_vers div {
+  margin-left: 5px;
+  margin-right: 5px;
+  float: right;
+}
+.swagger-section .swagger-ui-wrap div.api_vers > div a {
+  color: black;
+  text-decoration: none;
+  padding: 6px 10px 6px 10px;
+  border-radius: 2px;
+  width: auto;
+  height: 28px;
+}
+.swagger-section .swagger-ui-wrap div.api_vers > div a.active {
+  color: white;
+  background-color: #00a6f8;
+}
+.swagger-section .swagger-ui-wrap div.api_vers > div > a:not(.active) span {
+  border-bottom: 1px dotted;
 }
 .swagger-section .swagger-ui-wrap .footer {
   margin-top: 20px;
@@ -1251,8 +1271,7 @@ div.x-mq-eqchar {
   margin-top: -6px;
   margin-left: 4px;
 }
-.swagger-section #auth_container,
-.swagger-section #link_container {
+.swagger-section #auth_container {
   color: #fff;
   display: inline-block;
   border: none;
@@ -1260,12 +1279,8 @@ div.x-mq-eqchar {
   width: 87px;
   height: 13px;
 }
-.swagger-section #auth_container .authorize__btn,
-.swagger-section #link_container .authorize__btn {
+.swagger-section #auth_container .authorize__btn {
   color: #fff;
-}
-.swagger-section #link_container {
-  width: auto;
 }
 .swagger-section .auth_container {
   padding: 0 0 10px;
@@ -1462,8 +1477,7 @@ div.x-mq-eqchar {
   width: 200px;
 }
 .swagger-section #explore,
-.swagger-section #auth_container .authorize__btn,
-.swagger-section #link_container .link__btn {
+.swagger-section #auth_container .authorize__btn {
   display: block;
   text-decoration: none;
   padding: 6px 6px 6px 6px;
@@ -1489,13 +1503,8 @@ div.x-mq-eqchar {
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Tahoma;
 }
 .swagger-section #explore:hover,
-.swagger-section #auth_container .authorize__btn:hover,
-.swagger-section #link_container .link__btn:hover {
+.swagger-section #auth_container .authorize__btn:hover {
   background-color: #aeaeae;
-}
-.swagger-section #link_container .link__btn {
-  width: 20px;
-  display: inline;
 }
 .swagger-section #header #logo {
   font-size: 1.5em;

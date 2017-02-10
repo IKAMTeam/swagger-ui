@@ -149,9 +149,33 @@
     }
 
     .info_title {
-        padding-bottom: 10px;
+        padding-bottom: 30px;
         font-weight: bold;
         font-size: 25px;
+    }
+
+    div.api_vers div {
+        margin-left: 5px;
+        margin-right: 5px;
+        float: right;
+    }
+
+    div.api_vers > div a {
+        color: black;
+        text-decoration: none;
+        padding: 6px 10px 6px 10px;
+        border-radius: 2px;
+        width: auto;
+        height: 28px;
+    }
+
+    div.api_vers > div a.active {
+        color: white;
+        background-color: #00a6f8;
+    }
+
+    div.api_vers > div > a:not(.active) span {
+        border-bottom: 1px dotted;
     }
 
     .footer {

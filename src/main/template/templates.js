@@ -22,6 +22,28 @@ templates['apikey_auth'] = template({"1":function(container,depth0,helpers,parti
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isLogout : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "        </div>\n    </div>\n</div>\n";
 },"useData":true});
+templates['apivers_button'] = template({"1":function(container,depth0,helpers,partials,data) {
+    return "class=\"active\"";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div>\n    <a href=\""
+    + alias4(((helper = (helper = helpers.appServerUrl || (depth0 != null ? depth0.appServerUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"appServerUrl","hash":{},"data":data}) : helper)))
+    + "/api/v"
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + "\" "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isActive : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n        <span>API version "
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + "</span>\n    </a>\n</div>";
+},"useData":true});
+templates['apivers_view'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "<div class=\"api_vers\">\n    "
+    + ((stack1 = ((helper = (helper = helpers.code || (depth0 != null ? depth0.code : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"code","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n</div>\n";
+},"useData":true});
 templates['auth_button'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<a class='authorize__btn' href=\"#\">Authorize</a>\n";
 },"useData":true});
@@ -114,30 +136,12 @@ templates['content_type'] = template({"1":function(container,depth0,helpers,part
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.produces : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
     + "</select>\n";
 },"useData":true});
-templates['link_button'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "<a class='link__btn' href=\""
-    + alias4(((helper = (helper = helpers.appServerUrl || (depth0 != null ? depth0.appServerUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"appServerUrl","hash":{},"data":data}) : helper)))
-    + "/api/v"
-    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + "\" style=\"background-color: "
-    + ((stack1 = ((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"color","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\">v"
-    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + "</a>\n";
-},"useData":true});
-templates['link_view'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "<div id=\"link_container\">\n    "
-    + ((stack1 = ((helper = (helper = helpers.code || (depth0 != null ? depth0.code : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"code","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n</div>\n";
-},"useData":true});
 templates['main'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
-  return "  <div class=\"info_title\">"
+  return "  "
+    + ((stack1 = ((helper = (helper = helpers.apivers || (depth0 != null ? depth0.apivers : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"apivers","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n  <div class=\"info_title\">"
     + ((stack1 = (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(alias1,((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.title : stack1),{"name":"sanitize","hash":{},"data":data})) != null ? stack1 : "")
     + "</div>\n  <div class=\"info_description markdown\">"
     + ((stack1 = (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(alias1,((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.description : stack1),{"name":"sanitize","hash":{},"data":data})) != null ? stack1 : "")
