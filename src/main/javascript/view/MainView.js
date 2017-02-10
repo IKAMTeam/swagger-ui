@@ -136,7 +136,7 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
   onLinkClick: function (e) {
     var el = e.target;
 
-    if (el.tagName === 'A' && el.href && !el.target) {
+    if (el.tagName === 'A' && el.href && !el.target && !$(el).hasClass('api_vers_button')) {
         e.preventDefault();
         window.open(el.href, '_blank');
     }

@@ -1,5 +1,3 @@
-<div>
-    <a href="{{appServerUrl}}/api/v{{version}}" {{#if isActive}}class="active"{{/if}}>
-        <span>API version {{version}}</span>
-    </a>
-</div>
+<a class="api_vers_button {{#if isActive}}active{{/if}}" href="{{appServerUrl}}/api/v{{version}}">
+    <span>API version {{version}}</span>
+</a>

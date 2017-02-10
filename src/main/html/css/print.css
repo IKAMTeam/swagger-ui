@@ -337,24 +337,23 @@
   font-weight: bold;
   font-size: 25px;
 }
-.swagger-section .swagger-ui-wrap div.api_vers div {
-  margin-left: 5px;
-  margin-right: 5px;
+.swagger-section .swagger-ui-wrap div.api_vers {
   float: right;
 }
-.swagger-section .swagger-ui-wrap div.api_vers > div a {
+.swagger-section .swagger-ui-wrap div.api_vers a {
   color: black;
   text-decoration: none;
   padding: 6px 10px 6px 10px;
   border-radius: 2px;
-  width: auto;
-  height: 28px;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 28px;
 }
-.swagger-section .swagger-ui-wrap div.api_vers > div a.active {
+.swagger-section .swagger-ui-wrap div.api_vers a.active {
   color: white;
-  background-color: #00a6f8;
+  background-color: #42A5F5;
 }
-.swagger-section .swagger-ui-wrap div.api_vers > div > a:not(.active) span {
+.swagger-section .swagger-ui-wrap div.api_vers a:not(.active) span {
   border-bottom: 1px dotted;
 }
 .swagger-section .swagger-ui-wrap .footer {

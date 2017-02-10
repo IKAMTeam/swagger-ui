@@ -23,19 +23,19 @@ templates['apikey_auth'] = template({"1":function(container,depth0,helpers,parti
     + "        </div>\n    </div>\n</div>\n";
 },"useData":true});
 templates['apivers_button'] = template({"1":function(container,depth0,helpers,partials,data) {
-    return "class=\"active\"";
+    return "active";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div>\n    <a href=\""
+  return "<a class=\"api_vers_button "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isActive : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\" href=\""
     + alias4(((helper = (helper = helpers.appServerUrl || (depth0 != null ? depth0.appServerUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"appServerUrl","hash":{},"data":data}) : helper)))
     + "/api/v"
     + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + "\" "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isActive : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n        <span>API version "
+    + "\">\n    <span>API version "
     + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + "</span>\n    </a>\n</div>";
+    + "</span>\n</a>";
 },"useData":true});
 templates['apivers_view'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper;
