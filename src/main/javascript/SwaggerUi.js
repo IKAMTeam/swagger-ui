@@ -10,6 +10,7 @@ window.SwaggerUi = Backbone.Router.extend({
   api: null,
   headerView: null,
   mainView: null,
+  savedInputData: null,
 
   // SwaggerUi accepts all the same options as SwaggerApi
   initialize: function(options) {
@@ -100,6 +101,32 @@ window.SwaggerUi = Backbone.Router.extend({
   load: function(){
     // Initialize the API object
     if (this.mainView) {
+      // Save input data
+      var savedInputData = {};
+
+      $('ul#resources').find('div.content').each(function() {
+          var contentNode = $(this);
+          var id = contentNode.attr('id');
+          savedInputData[id] = {};
+          contentNode.find('input[type="text"]:not(.x-mq-param-name, .x-mq-param-value, .x-mq-param-add, .x-mq-param-remove), select').each(function() {
+            var name = $(this).attr('name');
+            savedInputData[id][name] = $(this).val();
+          });
+          contentNode.find('input[type="file"]').each(function() {
+            var name = $(this).attr('name');
+            savedInputData[id][name] = $(this)[0].files;
+          });
+
+          savedInputData[id]['x-mq-params'] = {};
+          contentNode.find('input.x-mq-param-name').each(function() {
+            var name = $(this).val();
+            var value = $(this).closest('tr').find('input.x-mq-param-value').val();
+
+            savedInputData[id]['x-mq-params'][name] = value;
+          });
+      });
+
+      this.savedInputData = savedInputData;
       this.mainView.clear();
     }
 
@@ -178,6 +205,47 @@ window.SwaggerUi = Backbone.Router.extend({
 
     if (this.options.onComplete){
       this.options.onComplete(this.api, this);
+    }
+
+    // Restore input data
+    if (this.savedInputData != null) {
+      var savedInputData = this.savedInputData;
+      $('ul#resources').find('div.content').each(function() {
+          var contentNode = $(this);
+          var id = contentNode.attr('id');
+
+          if (typeof(savedInputData[id]) != 'undefined') {
+              contentNode.find('input[type="text"]:not(.x-mq-param-name, .x-mq-param-value, .x-mq-param-add, .x-mq-param-remove), select').each(function() {
+                var name = $(this).attr('name');
+                if (typeof(savedInputData[id][name]) != 'undefined') {
+                    $(this).val(savedInputData[id][name]);
+                }
+              });
+              contentNode.find('input[type="file"]').each(function() {
+                var name = $(this).attr('name');
+                if (typeof(savedInputData[id][name]) != 'undefined') {
+                    $(this)[0].files = savedInputData[id][name];
+                }
+              });
+
+              var xmqParamsNode = contentNode.find('tbody.x-mq-params').first();
+              var xmqParamsAddButton = contentNode.find('input.x-mq-param-add').first();
+              if (xmqParamsNode.length != 0) {
+                var index = -1;
+                $.each(savedInputData[id]['x-mq-params'], function(name, value) {
+                  if (++index > 0) {
+                    xmqParamsAddButton.trigger('click');
+                  }
+
+                  var tr = xmqParamsNode.find('tr:eq(' + index + ')');
+                  tr.find('input.x-mq-param-name').val(name);
+                  tr.find('input.x-mq-param-value').val(value);
+                });
+              }
+          }
+      });
+
+      this.savedInputData = null;
     }
 
     setTimeout(Docs.shebang.bind(this), 100);
