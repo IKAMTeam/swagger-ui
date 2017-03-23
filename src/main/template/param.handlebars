@@ -16,32 +16,46 @@
 </td>
 <td>
 
-	{{#if isBody}}
-		{{#if isFile}}
-			<input type="file" name='{{{escape name}}}' id='{{{escape valueId}}}'/>
-			<div class="parameter-content-type" />
-		{{else}}
-			{{#if default}}
-				<div class="editor_holder"></div>
-				<textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'>{{{escape default}}}</textarea>
-		<br />
-		<div class="parameter-content-type" />
-			{{else}}
-				<textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'></textarea>
-				<div class="editor_holder"></div>
-				<br />
-				<div class="parameter-content-type" />
-			{{/if}}
-		{{/if}}
-	{{else}}
-		{{#if isFile}}
-			<input type="file" name='{{{escape name}}}' id='{{{escape valueId}}}'/>
-			<div class="parameter-content-type" />
-		{{else}}
-			{{#renderTextParam this}}
-			{{/renderTextParam}}
-		{{/if}}
-	{{/if}}
+    {{#if isPartData}}
+        {{#if default}}
+            <div class="editor_holder"></div>
+            <textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'>{{{escape default}}}</textarea>
+            <br />
+            <div class="parameter-content-type" />
+        {{else}}
+            <textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'></textarea>
+            <div class="editor_holder"></div>
+            <br />
+            <div class="parameter-content-type" />
+        {{/if}}
+    {{else}}
+        {{#if isBody}}
+            {{#if isFile}}
+                <input type="file" name='{{{escape name}}}' id='{{{escape valueId}}}'/>
+                <div class="parameter-content-type" />
+            {{else}}
+                {{#if default}}
+                    <div class="editor_holder"></div>
+                    <textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'>{{{escape default}}}</textarea>
+            <br />
+            <div class="parameter-content-type" />
+                {{else}}
+                    <textarea class='body-textarea' name='{{{escape name}}}' id='{{{escape valueId}}}'></textarea>
+                    <div class="editor_holder"></div>
+                    <br />
+                    <div class="parameter-content-type" />
+                {{/if}}
+            {{/if}}
+        {{else}}
+            {{#if isFile}}
+                <input type="file" name='{{{escape name}}}' id='{{{escape valueId}}}'/>
+                <div class="parameter-content-type" />
+            {{else}}
+                {{#renderTextParam this}}
+                {{/renderTextParam}}
+            {{/if}}
+        {{/if}}
+    {{/if}}
 
 </td>
 {{/if}}

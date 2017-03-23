@@ -41,6 +41,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     this.model.type = type;
     this.model.paramType = this.model.in || this.model.paramType;
     this.model.isBody = this.model.paramType === 'body' || this.model.in === 'body';
+    this.model.isPartData = (this.model.paramType === 'formData' || this.model.in === 'formData') && typeof this.model.schema !== 'undefined';
     this.model.isFile = type && type.toLowerCase() === 'file';
 
     // Allow for default === false
@@ -120,6 +121,12 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     };
 
     contentTypeModel.consumes = this.model.consumes;
+
+    if (this.model.isPartData) {
+        contentTypeModel.consumes = ['application/json'] || this.model['x-part-consumes'];
+        contentTypeModel.isParam = true;
+        isParam = true;
+    }
 
     if (isParam) {
       var parameterContentTypeView = new SwaggerUi.Views.ParameterContentTypeView({model: contentTypeModel});
