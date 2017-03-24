@@ -208,29 +208,29 @@ window.SwaggerUi = Backbone.Router.extend({
     }
 
     // Restore input data
-    if (this.savedInputData != null) {
+    if (this.savedInputData !== null) {
       var savedInputData = this.savedInputData;
       $('ul#resources').find('div.content').each(function() {
           var contentNode = $(this);
           var id = contentNode.attr('id');
 
-          if (typeof(savedInputData[id]) != 'undefined') {
+          if (typeof(savedInputData[id]) !== 'undefined') {
               contentNode.find('input[type="text"]:not(.x-mq-param-name, .x-mq-param-value, .x-mq-param-add, .x-mq-param-remove), select').each(function() {
                 var name = $(this).attr('name');
-                if (typeof(savedInputData[id][name]) != 'undefined') {
+                if (typeof(savedInputData[id][name]) !== 'undefined') {
                     $(this).val(savedInputData[id][name]);
                 }
               });
               contentNode.find('input[type="file"]').each(function() {
                 var name = $(this).attr('name');
-                if (typeof(savedInputData[id][name]) != 'undefined') {
+                if (typeof(savedInputData[id][name]) !== 'undefined') {
                     $(this)[0].files = savedInputData[id][name];
                 }
               });
 
               var xmqParamsNode = contentNode.find('tbody.x-mq-params').first();
               var xmqParamsAddButton = contentNode.find('input.x-mq-param-add').first();
-              if (xmqParamsNode.length != 0) {
+              if (xmqParamsNode.length !== 0) {
                 var index = -1;
                 $.each(savedInputData[id]['x-mq-params'], function(name, value) {
                   if (++index > 0) {

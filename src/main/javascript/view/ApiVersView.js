@@ -14,7 +14,7 @@ SwaggerUi.Views.ApiVersView = Backbone.View.extend({
             el.append(Handlebars.templates.apivers_button({
                 appServerUrl: options.appServerUrl,
                 version: value,
-                isActive: options.apiVer == value
+                isActive: options.apiVer === value
             }));
         });
 

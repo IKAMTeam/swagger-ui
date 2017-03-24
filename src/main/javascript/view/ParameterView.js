@@ -76,7 +76,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       $('.model-signature', $(this.el)).append(signatureView.render().el);
     }
     else {
-      $('.model-signature', $(this.el)).html(this.model.signature != 'undefined' ? this.model.signature : '');
+      $('.model-signature', $(this.el)).html(this.model.signature !== 'undefined' ? this.model.signature : '');
     }
 
     var isParam = false;
