@@ -503,9 +503,11 @@ SwaggerUi.partials.signature = (function () {
         output = schema.default;
       } else if (type === 'string') {
         if (format === 'date-time') {
-          output = new Date().toISOString();
+          output = new Date().toISOString().split('.')[0];
         } else if (format === 'date') {
           output = new Date().toISOString().split('T')[0];
+        } else if (format === 'time') {
+          output = new Date().toISOString().split('T')[1].substring(0, 8);
         } else {
           output = 'string';
         }
