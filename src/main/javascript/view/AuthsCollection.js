@@ -37,6 +37,9 @@ SwaggerUi.Collections.AuthsCollection = Backbone.Collection.extend({
                 case 'apiKey':
                     result = new SwaggerUi.Models.ApiKeyAuthModel(model);
                     break;
+                case 'bearer_token':
+                    result = new SwaggerUi.Models.BearerTokenAuthModel(model);
+                    break;
                 default:
                     result = new Backbone.Model(model);
             }

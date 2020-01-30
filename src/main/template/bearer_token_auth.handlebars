@@ -1,0 +1,20 @@
+<div class='bearer_token_auth_container'>
+    <h3 class="auth__title">Token authentication{{#if isLogout}} - authorized{{/if}}</h3>
+    <form class="bearer_token_input_container">
+        <div class="auth__description">{{{sanitize description}}}</div>
+        <div class="auth_label">
+            <span class="bearer_token_auth__label" data-sw-translate>Access Key:</span>
+            {{#if isLogout}}
+                <span class="bearer_token_auth__value">{{{escape accessKey}}}</span>
+            {{else}}
+                <input required placeholder="Access Key" class="bearer_token_auth__accessKey auth_input" name="accessKey" type="text"/>
+            {{/if}}
+        </div>
+        {{#unless isLogout}}
+            <div class="auth_label">
+                <span class="bearer_token_auth__label" data-sw-translate>Secret Key:</span>
+                <input required placeholder="Secret Key" class="bearer_token_auth__secretKey auth_input" name="secretKey" type="password"/></label>
+            </div>
+        {{/unless}}
+    </form>
+</div>

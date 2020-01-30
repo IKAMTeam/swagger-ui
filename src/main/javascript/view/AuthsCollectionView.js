@@ -33,6 +33,8 @@ SwaggerUi.Views.AuthsCollectionView = Backbone.View.extend({
             authViewName = 'BasicAuthView';
         } else if (type === 'oauth2') {
             authViewName = 'Oauth2View';
+        } else if (type === 'bearer_token') {
+            authViewName = 'BearerTokenAuthView';
         }
 
         if (authViewName) {

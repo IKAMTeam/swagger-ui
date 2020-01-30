@@ -58,7 +58,7 @@ SwaggerUi.Views.AuthView = Backbone.View.extend({
 
     authorize: function () {
         this.authsCollectionView.collection.forEach(function (auth) {
-            var keyAuth, basicAuth;
+            var keyAuth, basicAuth, bearerTokenAuth;
             var type = auth.get('type');
 
             if (type === 'apiKey') {
@@ -74,6 +74,9 @@ SwaggerUi.Views.AuthView = Backbone.View.extend({
                 this.router.api.clientAuthorizations.add(auth.get('title'), basicAuth);
             } else if (type === 'oauth2') {
                 this.handleOauth2Login(auth);
+            } else if (type === 'bearer_token') {
+                bearerTokenAuth = new SwaggerClient.BearerTokenAuthorization(auth.get('accessKey'), auth.get('secretKey'));
+                this.router.api.clientAuthorizations.add(auth.get('title'), bearerTokenAuth);
             }
         }, this);
 
