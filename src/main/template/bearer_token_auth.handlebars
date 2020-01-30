@@ -7,13 +7,13 @@
             {{#if isLogout}}
                 <span class="bearer_token_auth__value">{{{escape accessKey}}}</span>
             {{else}}
-                <input required class="bearer_token_auth__accessKey auth_input" name="accessKey" type="text"/>
+                <input placeholder="Access Key" required class="bearer_token_auth__accessKey auth_input" name="accessKey" type="text"/>
             {{/if}}
         </div>
         {{#unless isLogout}}
             <div class="auth_label">
                 <span class="bearer_token_auth__label" data-sw-translate>Secret Key:</span>
-                <input required class="bearer_token_auth__secretKey auth_input" name="secretKey" type="password"/></label>
+                <input placeholder="Secret Key" required class="bearer_token_auth__secretKey auth_input" name="secretKey" type="password"/></label>
             </div>
         {{/unless}}
     </form>
