@@ -1,6 +1,6 @@
 'use strict';
 
-SwaggerUi.Views.BasicAuthView = Backbone.View.extend({
+SwaggerUi.Views.BearerTokenAuthView = Backbone.View.extend({
 
     initialize: function (opts) {
         this.options = opts || {};
