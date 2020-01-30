@@ -1301,6 +1301,10 @@ div.x-mq-eqchar {
   display: inline-block;
   width: 60px;
 }
+.swagger-section .auth_container .bearer_token_auth__label {
+  display: inline-block;
+  width: 70px;
+}
 .swagger-section .auth_container .auth__description {
   color: #999999;
   margin-bottom: 5px;
