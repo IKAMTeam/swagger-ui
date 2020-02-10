@@ -29,11 +29,14 @@ SwaggerUi.Views.AuthView = Backbone.View.extend({
         opts.data = opts.data || {};
         this.router = this.options.router;
 
+        var disableLoginButton = Object.keys(opts.router.api.clientAuthorizations.authz).length > 0;
+
         this.authsCollectionView = new SwaggerUi.Views.AuthsCollectionView({data: opts.data});
 
         this.$el.html(this.tpls.main({
             isLogout: this.authsCollectionView.collection.isAuthorized(),
-            isAuthorized: this.authsCollectionView.collection.isPartiallyAuthorized()
+            isAuthorized: this.authsCollectionView.collection.isPartiallyAuthorized(),
+            isDisableLoginButton: disableLoginButton
         }));
         this.$innerEl = this.$(this.selectors.innerEl);
         this.isLogout = this.authsCollectionView.collection.isPartiallyAuthorized();
