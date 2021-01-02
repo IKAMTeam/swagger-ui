@@ -43,6 +43,14 @@ You can rebuild swagger-ui on your own to tweak it or just so you can say you di
 
 ### Windows Users: Please install [Python](https://www.python.org/downloads/windows/) before follow below guidelines for node-gyp rebuild to run.
 
+### UNDER DOCKER ###
+```
+docker run -it -p 81:8080 -v<host>/swagger-ui:/swagger-ui --rm node:10.23.0-buster /bin/bash
+$ cd /swagger-ui
+$ npm install
+$ npm run build
+```
+
 1. `npm install`
 2. `npm run build`
 3. You should see the distribution under the dist folder. Open [`./dist/index.html`](./dist/index.html) to launch Swagger UI in a browser
